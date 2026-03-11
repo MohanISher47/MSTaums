@@ -1,14 +1,17 @@
 (function () {
+  // what happened???? where am i
   if (document.getElementById("bm-launcher")) return;
 
   const box = document.createElement("div");
   box.id = "bm-launcher";
 
+  // I shall marry FONTAWESOME
   const fontawesome = document.createElement("link");
   fontawesome.rel = "stylesheet";
   fontawesome.href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css";
   document.head.appendChild(fontawesome);
 
+  //What Object are they talking bout hehe
   Object.assign(box.style, {
     position: "fixed",
     top: "20px",
@@ -27,6 +30,7 @@
     transition: "transform .2s"
   });
 
+  // Dos nit wrk 4 sm reason
   const logo = document.createElement("div");
   logo.innerHTML = '<i class="fa-solid fa-user-secret"></i>';
   Object.assign(logo.style, {
@@ -38,6 +42,7 @@
   });
   box.appendChild(logo);
 
+  // MSTaums ur local soul contractor
   const title = document.createElement("div");
   title.textContent = "MSTaums";
 
@@ -56,6 +61,7 @@
   const container = document.createElement("div");
   box.appendChild(container);
 
+  // Ohlalala
   const bookmarklets = {
     "IXLambda Loader : SUMO": function () {
       var script = document.createElement("script");
@@ -79,6 +85,7 @@
     }
   };
 
+  // GET OUT
   Object.keys(bookmarklets).forEach(name => {
 
     const btn = document.createElement("button");
@@ -113,6 +120,7 @@
 
   });
 
+  //WHY THE DRAGGING NOT WOK HAHAHAHAHH
   const close = document.createElement("button");
   close.textContent = "✕ Close";
 
