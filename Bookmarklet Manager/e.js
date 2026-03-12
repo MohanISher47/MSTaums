@@ -1,6 +1,6 @@
 (function () {
     console.log(
-        "%cMSTaums loaded",
+        "%cMSTaums v2.0 loaded",
         "font-family: 'Segoe UI', monospace; font-size:16px; font-weight:bold; color:#00e0ff; background:#111; padding:6px 10px; border-radius:6px;"
     );
 
@@ -137,7 +137,7 @@
             <div id="bm-ui-launcher" class="bm-dark">
 
             <div class="bm-header">
-            <span><i class="fa-solid fa-user-secret"></i> MSTaums</span>
+            <span><i class="fa-solid fa-user-secret"></i> MSTaums v2.0</span>
 
             <div class="bm-controls">
             <button id="bm-theme">🌙</button>
@@ -153,7 +153,7 @@
             <div class="bm-content"></div>
 
             <div class="bm-footer">
-            MSTaums by T.E.D.A
+            MSTaums v2.0 by T.E.D.A, also more utilities coming soon 
             </div>
 
             </div>
@@ -167,23 +167,11 @@
 
             Utilities: [
                 {
-                    name: "Alert Hello",
-                    run() { alert("Hello!"); }
-                },
-
-                {
-                    name: "Show Page URL",
-                    run() { alert(location.href); }
-                },
-
-                {
                     name: "Invert Page Colors",
                     run() {
-                        document.body.style.filter =
-                            document.body.style.filter === "invert(1)" ? "" : "invert(1)";
+                        document.body.style.filter = document.body.style.filter === "invert(1)" ? "" : "invert(1)";
                     }
                 }
-
             ],
 
             Scripts: [
@@ -192,6 +180,22 @@
                     run() {
                         var script = document.createElement("script");
                         script.src = "https://cdn.jsdelivr.net/gh/Augtive85YT/PhiPiBeta@main/IXLambda/main.js";
+                        document.head.appendChild(script);
+                    }
+                },
+                {
+                    name: "Blooket Hacks by X-GUI",
+                    run() {
+                        var script = document.createElement("script");
+                        script.src = "https://gl.githack.com/CidCaribou/x-gui/-/raw/main/x-gui.js"
+                        document.head.appendChild(script);
+                    }
+                },
+                {
+                    name: "Executor by X-GUI",
+                    run() {
+                        var script = document.createElement("script");
+                        script.src = "https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Menu@main/menu.js"
                         document.head.appendChild(script);
                     }
                 }
