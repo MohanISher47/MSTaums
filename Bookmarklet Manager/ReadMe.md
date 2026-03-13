@@ -3,7 +3,7 @@
 MSTaums is a bookmarklet that manages other bookmarklets using jquery for the ui, js for the coding language, and Katnaya bookmarklet generator.
 
 ## How to use
-1. Pay for code to get bookmarklet code
+1. Go to Bookmarklet.js
 2. Copy the code using the copy button in the top right corner of the code block
 
 For Mobile:
