@@ -213,14 +213,9 @@ Scripts
 <div class="ms-card-bar">Extras</div>
 </div>
 
-<div class="ms-card" data-page="custom">
-Custom
-<div class="ms-card-bar">Modules</div>
-</div>
-
 <div class="ms-card" data-page="tools">
 Tools
-<div class="ms-card-bar">Advanced</div>
+<div class="ms-card-bar">Tools</div>
 </div>
 
 </div>
