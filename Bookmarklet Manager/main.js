@@ -1,6 +1,6 @@
 (function () {
 
-console.log("%cMSTaums v4 loaded", "font-size:20px;font-weight:bold;color:#8a5cff");
+console.log("%cMSTaums v4.5 loaded", "font-size:20px;font-weight:bold;color:#8a5cff");
 console.log("%cby T.E.D.A", "font-size:13px;font-weight:bold;color:#44aaa4");
 console.log("%cThank you for using it!!!", "font-size:15px;font-weight:bold;color:#42c1a4");
 
@@ -20,6 +20,8 @@ const style=document.createElement("style");
 
 style.textContent=`
 
+@import url("https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@latest/css/nerd-fonts-generated.css");
+
 :root{
 --ms-bg:rgba(30,30,46,.65);
 --ms-bar:rgba(24,24,37,.75);
@@ -27,6 +29,7 @@ style.textContent=`
 --ms-hover:rgba(69,71,90,.7);
 --ms-text:#cdd6f4;
 --ms-accent:#b4befe;
+--ms-font: "Iosevka Charon Mono", monospace;
 }
 
 #mstaums-ui{
@@ -40,11 +43,22 @@ background:var(--ms-bg);
 backdrop-filter:blur(18px);
 border-radius:16px;
 border:1px solid rgba(255,255,255,.08);
-box-shadow:0 20px 60px rgba(0,0,0,.5);
-font-family:"JetBrains Mono",monospace;
+box-shadow:0 5px 10px var(--ms-accent);
+font-family: var(--ms-font);
 display:flex;
 flex-direction:column;
 overflow:hidden;
+transition:height .25s cubic-bezier(.4,0,.2,1),width .2s ease;
+}
+
+#mstaums-ui.minimized{
+height:40px !important;
+overflow:hidden;
+}
+
+#mstaums-ui.minimized .ms-layout,
+#mstaums-ui.minimized .ms-resizer{
+display:none;
 }
 
 .ms-resizer{
@@ -97,13 +111,15 @@ font-weight:bold;
 .ms-close:hover::after{content:"×";opacity:1;}
 .ms-min:hover::after{content:"–";opacity:1;}
 
-p {
-padding-top: none;
-color: var(--ms-text);
+.ms-icon{
+width:18px;
+height:18px;
+margin-left:10px;
+margin-right:6px;
+border-radius:4px;
 }
 
 .ms-title{
-margin-left:12px;
 color:var(--ms-text);
 font-size:13px;
 opacity:.9;
@@ -173,7 +189,6 @@ gap:10px;
 padding:18px;
 box-sizing:border-box;
 overflow-y:auto;
-overflow-x:hidden;
 opacity:0;
 transition:opacity .18s ease;
 }
@@ -189,9 +204,8 @@ color:var(--ms-text);
 }
 
 .ms-button{
-font-family:"JetBrains Mono",monospace;
+font-family: var(--ms-font);
 width:100%;
-box-sizing:border-box;
 background:var(--ms-surface);
 border:none;
 color:var(--ms-text);
@@ -199,7 +213,6 @@ padding:10px;
 border-radius:8px;
 cursor:pointer;
 font-size:13px;
-transition:opacity .15s ease;
 }
 
 .ms-button:hover{
@@ -212,31 +225,23 @@ color:var(--ms-text);
 border:none;
 padding:10px;
 border-radius:8px;
-font-family:"JetBrains Mono",monospace;
+font-family: var(--ms-font);
 cursor:pointer;
 }
 
-.ms-page::-webkit-scrollbar{
-width:6px;
-}
-
-.ms-page::-webkit-scrollbar-thumb{
-background:var(--ms-accent);
-border-radius:6px;
-}
-
-#mstaums-mini{
-position:fixed;
-bottom:20px;
-right:20px;
-background:var(--ms-accent);
-color:#1e1e2e;
-padding:10px 16px;
-border-radius:10px;
+#font-selector{
+background:var(--ms-surface);
+color:var(--ms-text);
+border:none;
+padding:10px;
+border-radius:8px;
+font-family: var(--ms-font);
 cursor:pointer;
-font-family:"JetBrains Mono",monospace;
-z-index:999999;
-display:none;
+}
+
+#theme-selecter:hover, 
+#font-selector:hover {
+    background:var(--ms-hover);
 }
 
 `;
@@ -248,6 +253,7 @@ ui.id="mstaums-ui";
 
 ui.innerHTML=`
 
+<link href="https://fonts.googleapis.com/css?family=Iosevka+Charon+Mono" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
 
 <div class="ms-titlebar">
@@ -255,7 +261,10 @@ ui.innerHTML=`
 <div class="ms-btn ms-close"></div>
 <div class="ms-btn ms-min"></div>
 </div>
-<div class="ms-title">MSTaums v4</div>
+
+<img class="ms-icon" src="https://raw-githubusercontent-com.translate.goog/MohanIShim47/MSTaums/main/icon.png">
+
+<div class="ms-title">MSTaums v4.5</div>
 </div>
 
 <div class="ms-layout">
@@ -269,8 +278,9 @@ border-radius:8px;
 border:none;
 background:var(--ms-surface);
 color:var(--ms-text);
-font-family:'JetBrains Mono',monospace;
+font-family: var(--ms-font);
 ">
+
 <div class="ms-side-item active" data-page="home"><span><i class="fa-solid fa-house"></i></span>Home</div>
 <div class="ms-side-item" data-page="utilities"><span><i class="fa-solid fa-toolbox"></i></span>Utilities</div>
 <div class="ms-side-item" data-page="scripts"><span><i class="fa-solid fa-code"></i></span>Scripts</div>
@@ -284,7 +294,7 @@ font-family:'JetBrains Mono',monospace;
 
 <div class="ms-page active" id="home">
 
-<div class="ms-header">Welcome to MSTaums</div>
+<div class="ms-header">Welcome to MSTaums v4.5</div>
 
 <div style="
 background:var(--ms-surface);
@@ -294,7 +304,7 @@ line-height:1.6;
 font-size:13px;
 ">
 
-<p><b>MSTaums v4</b> is a modular bookmarklet toolkit built for running scripts, utilities, and developer tools directly inside your browser.</p>
+<p><b>MSTaums v4.5</b> is a modular bookmarklet toolkit built for running scripts, utilities, and developer tools directly inside your browser.</p>
 
 <p>This interface works like a lightweight script hub with modules organized into categories.</p>
 
@@ -358,7 +368,7 @@ border-radius:10px;
 ">
 <b><i class="fa-solid fa-gear"></i> Settings</b>
 <p style="font-size:12px;opacity:.8">
-Customize themes and preferences for MSTaums.
+Customize themes and preferences for MSTaums v4.5.
 </p>
 </div>
 
@@ -382,11 +392,10 @@ Tip: Use <b>Ctrl + K</b> to quickly focus the search bar.
 
 <div class="ms-page" id="utilities">
 <div class="ms-header">Utilities</div>
-
 <button class="ms-button" data-action="invert">Invert Page Colors</button>
 <button class="ms-button" data-action="url">Show Page URL</button>
 <button class="ms-button" data-action="hello">Alert Hello</button>
-
+<button class="ms-button" data-action="3d-page">3d Pagifier</button>
 </div>
 
 <div class="ms-page" id="scripts">
@@ -411,10 +420,17 @@ Tip: Use <b>Ctrl + K</b> to quickly focus the search bar.
 <div class="ms-header">Themes</div>
 
 <select id="theme-selector">
-<option value="mocha">Catppuccin Mocha</option>
+<option value="mocha">Catppuccin Mocha (default)</option>
 <option value="dark">Dark</option>
 <option value="light">Light</option>
 <option value="hack">Hack</option>
+</select>
+
+<div class="ms-header">Font</div>
+
+<select id="font-selector">
+<option value="iosev">Iosevka Charon Mono (default)</option>
+<option value="jetbrains">JetBrains Mono</option>
 </select>
 
 </div>
@@ -430,14 +446,10 @@ document.body.appendChild(ui);
 
 document.querySelectorAll(".ms-side-item").forEach(item=>{
 item.onclick=()=>{
-
 document.querySelectorAll(".ms-side-item").forEach(i=>i.classList.remove("active"));
 item.classList.add("active");
-
 document.querySelectorAll(".ms-page").forEach(p=>p.classList.remove("active"));
-
 document.getElementById(item.dataset.page).classList.add("active");
-
 };
 });
 
@@ -501,58 +513,6 @@ document.head.appendChild(s);
 
 });
 
-const resizer=ui.querySelector(".ms-resizer");
-let resizing=false;
-
-resizer.onmousedown=()=>resizing=true;
-
-document.onmousemove=e=>{
-if(!resizing) return;
-
-ui.style.width=Math.max(600,e.clientX-ui.offsetLeft)+"px";
-ui.style.height=Math.max(400,e.clientY-ui.offsetTop)+"px";
-};
-
-document.onmouseup=()=>resizing=false;
-
-let dragging=false,offsetX,offsetY;
-
-const titlebar=ui.querySelector(".ms-titlebar");
-
-titlebar.onmousedown=e=>{
-dragging=true;
-offsetX=e.clientX-ui.offsetLeft;
-offsetY=e.clientY-ui.offsetTop;
-};
-
-document.onmousemove=e=>{
-if(!dragging) return;
-
-ui.style.left=(e.clientX-offsetX)+"px";
-ui.style.top=(e.clientY-offsetY)+"px";
-};
-
-document.onmouseup=()=>dragging=false;
-
-ui.querySelector(".ms-close").onclick=()=>ui.remove();
-
-ui.querySelector(".ms-min").onclick=()=>{
-
-ui.style.display="none";
-
-const mini=document.createElement("div");
-mini.id="mstaums-mini";
-mini.textContent="Open MSTaums";
-
-document.body.appendChild(mini);
-
-mini.onclick=()=>{
-ui.style.display="flex";
-mini.remove();
-};
-
-};
-
 function setTheme(theme){
 
 const root=document.documentElement;
@@ -571,7 +531,7 @@ root.style.setProperty("--ms-bg","rgba(18,18,20,.7)");
 root.style.setProperty("--ms-bar","rgba(30,30,32,.8)");
 root.style.setProperty("--ms-surface","rgba(45,45,48,.6)");
 root.style.setProperty("--ms-hover","rgba(70,70,75,.7)");
-root.style.setProperty("--ms-text","#fff");
+root.style.setProperty("--ms-text","#ffffff");
 root.style.setProperty("--ms-accent","#4dabf7");
 }
 
@@ -610,38 +570,94 @@ setTheme(saved);
 selector.value=saved;
 }
 
-const search=document.getElementById("mstaums-search");
+function setFont(font) {
+    const root=document.documentElement;
 
-search.addEventListener("input",()=>{
+    if (font==="iosev") {
+    root.style.setProperty("--ms-font", '"Iosevka Charon Mono", monospace');
+    }
 
-const query=search.value.toLowerCase();
+    if (font==="jetbrains") {
+    root.style.setProperty("--ms-font", '"JetBrains Mono", monospace');
+    }
+}
 
-document.querySelectorAll(".ms-button").forEach(btn=>{
+const fselector=document.getElementById("font-selector");
 
-const text=btn.textContent.toLowerCase();
+fselector.onchange=()=>{
+const font=fselector.value;
+setFont(font);
+localStorage.setItem("mstaums-font",font);
+};
 
-if(text.includes(query)){
-btn.style.display="block";
+const fsaved=localStorage.getItem("mstaums-font");
+
+if(fsaved){
+setFont(fsaved);
+fselector.value=fsaved;
+}
+
+let resizing=false;
+let dragging=false;
+let offsetX,offsetY;
+
+const resizer=ui.querySelector(".ms-resizer");
+const titlebar=ui.querySelector(".ms-titlebar");
+
+resizer.onmousedown=()=>resizing=true;
+
+titlebar.onmousedown=e=>{
+dragging=true;
+offsetX=e.clientX-ui.offsetLeft;
+offsetY=e.clientY-ui.offsetTop;
+};
+
+document.addEventListener("mousemove",e=>{
+
+if(resizing){
+ui.style.width=Math.max(600,e.clientX-ui.offsetLeft)+"px";
+ui.style.height=Math.max(400,e.clientY-ui.offsetTop)+"px";
+}
+
+if(dragging){
+ui.style.left=(e.clientX-offsetX)+"px";
+ui.style.top=(e.clientY-offsetY)+"px";
+}
+
+});
+
+document.addEventListener("mouseup",()=>{
+resizing=false;
+dragging=false;
+});
+
+ui.querySelector(".ms-close").onclick=()=>ui.remove();
+
+let minimized=false;
+
+ui.querySelector(".ms-min").onclick=()=>{
+
+if(!minimized){
+
+ui.dataset.prevHeight=ui.offsetHeight+"px";
+ui.classList.add("minimized");
+minimized=true;
+
 }else{
-btn.style.display="none";
+
+ui.classList.remove("minimized");
+ui.style.height=ui.dataset.prevHeight;
+minimized=false;
+
 }
 
-});
+};
 
-});
+titlebar.addEventListener("dblclick",()=>{
 
-document.addEventListener("keydown",e=>{
-
-if(e.ctrlKey && e.key.toLowerCase()==="k"){
-e.preventDefault();
-
-const input=document.querySelector("#mstaums-search");
-
-if(input){
-input.focus();
-input.select();
-}
-
+if(ui.classList.contains("minimized")){
+ui.classList.remove("minimized");
+minimized=false;
 }
 
 });
