@@ -9,7 +9,7 @@ Copy the code below and paste it into the url input of your bookmarklet. If you 
 Please read the license to make sure you don't violate it. Also you are allowed to take the code and modify just please give me credit and make sure it uses the same license used on this repository.
 
 ```js
-
+javascript:(function()%7Bvar script %3D document.createElement("script")%3B%0Ascript.src %3D "https%3A%2F%2Fraw-githack-com.translate.goog%2FMohanIShim47%2FScriptix%2Fmain%2FBookmarklet%2520Manager%2Fmain.js"%3B%0Adocument.head.appendChild(script)%3B%7D)()
 ```
 ## note: 
 Scrolling on some websites don't work!
