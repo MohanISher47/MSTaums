@@ -1,3 +1,5 @@
+(function(){
+
 if(window.MSUserScriptManagerLoaded) return;
 window.MSUserScriptManagerLoaded = true;
 
@@ -339,3 +341,5 @@ document.addEventListener("mouseup",()=>dragging=false);
 
 refresh();
 runScripts();
+
+})();
