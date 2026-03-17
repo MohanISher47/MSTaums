@@ -524,10 +524,10 @@ shadow.addEventListener("click",e=>{
 
   const action=btn.dataset.action;
 
-  function load(src) {
-    const s=document.createElement("script");
+  let load = src =>{
+    let s=document.createElement("script");
     s.src=src;
-    document.body.appendChild(s);
+    document.head.appendChild(s);
   };
 
   if(action==="hello") alert("Hello!");
