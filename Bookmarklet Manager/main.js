@@ -5,7 +5,7 @@ if (document.getElementById("scriptix-shadow")) return;
 console.log("%cScriptix Loaded!!","font-size:20px;font-weight:bold;color:#8a5cff");
 console.log("%cby T.E.D.A","font-size:13px;font-weight:bold;color:#44aaa4");
 
-// SHADOW ROOT
+// -------------- SHADOW ROOT -------------------
 
 const host = document.createElement("div");
 host.id = "scriptix-shadow";
@@ -17,14 +17,14 @@ host.style.zIndex = "999999";
 const shadow = host.attachShadow({ mode: "open" });
 document.body.appendChild(host);
 
-// Font Stuff
+// ------------------Font Stuff----------------
 const fontStyle = document.createElement("style");
 fontStyle.textContent = `
 @import url('https://fonts.googleapis.com/css2?family=Iosevka+Charon+Mono&display=swap');
 `;
 shadow.appendChild(fontStyle);
 
-// STYLES
+// -------------STYLES------------------
 
 const style = document.createElement("style");
 style.textContent = `
@@ -283,8 +283,8 @@ ${document.querySelector("style")?.textContent || ""}
 `;
 shadow.appendChild(style);
 
-// UI
-
+// -----------UI------------------
+    
 const ui = document.createElement("div");
 ui.id = "scriptix-ui";
 
@@ -490,7 +490,7 @@ ui.innerHTML = `
 
 shadow.appendChild(ui);
 
-// LUCIDE 
+// --------------LUCIDE--------------
 
 const slucide = document.createElement("script");
 slucide.src = "https://unpkg.com/lucide@latest";
@@ -499,12 +499,12 @@ slucide.onload = () => {
 };
 document.head.appendChild(slucide);
 
-// HELPERS 
+// -------------HELPERS-----------------
 
 const $ = sel => shadow.querySelector(sel);
 const $$ = sel => shadow.querySelectorAll(sel);
 
-// PAGE SWITCHING
+// ---------------PAGE SWITCHING----------
 
 $$(".ms-side-item").forEach(item=>{
   item.onclick=()=>{
@@ -516,7 +516,7 @@ $$(".ms-side-item").forEach(item=>{
   };
 });
 
-// BUTTON ACTIONS
+// -------------- BUTTON ACTIONS ---------------
 
     
 shadow.addEventListener("click",e=>{
@@ -590,7 +590,7 @@ shadow.addEventListener("click",e=>{
 
 });
 
-// SEARCH
+// ------------------- SEARCH ---------------------
 
 const search = $("#scriptix-search");
 
@@ -603,7 +603,7 @@ if(search){
   });
 }
 
-// THEME SYSTEM
+// ----------------- THEME SYSTEM -----------------
 
 function setTheme(theme){
   const root=$("#scriptix-ui");
@@ -650,83 +650,101 @@ if(selector){
   }
 }
 
-// DRAG + RESIZE
+// ---------------- DRAG + RESIZE + MINIMIZE + CLOS ------------
 
-let dragging=false,resizing=false,ox=0,oy=0;
+let resizing = false;
+let dragging = false;
+let offsetX = 0, offsetY = 0;
 
-const bar=$(".ms-titlebar");
-const resizer=$(".ms-resizer");
+const resizer = ui.querySelector(".ms-resizer");
+const titlebar = ui.querySelector(".ms-titlebar");
 
-bar.onmousedown=e=>{
-  dragging=true;
-  ox=e.clientX-ui.offsetLeft;
-  oy=e.clientY-ui.offsetTop;
+ui.querySelector(".ms-close").onclick=()=>{
+ui.classList.add("closing");
+
+setTimeout(()=>{
+ui.remove();
+},250);
 };
 
-resizer.onmousedown=()=>resizing=true;
+let minimized=false;
 
-document.addEventListener("mousemove",e=>{
-  if(dragging){
-    ui.style.left=(e.clientX-ox)+"px";
-    ui.style.top=(e.clientY-oy)+"px";
-  }
-  if(resizing){
-    ui.style.width=Math.max(600,e.clientX-ui.offsetLeft)+"px";
-    ui.style.height=Math.max(400,e.clientY-ui.offsetTop)+"px";
-  }
+ui.querySelector(".ms-min").onclick=()=>{
+
+if(!minimized){
+
+ui.dataset.prevWidth = ui.offsetWidth + "px";
+ui.dataset.prevHeight = ui.offsetHeight + "px";
+
+ui.style.width = "220px";
+ui.style.height = "40px";
+
+ui.classList.add("minimized");
+minimized=true;
+
+}else{
+
+ui.classList.remove("minimized");
+
+ui.style.width = ui.dataset.prevWidth;
+ui.style.height = ui.dataset.prevHeight;
+
+ui.classList.add("restoring");
+
+setTimeout(()=>{
+ui.classList.remove("restoring");
+},250);
+
+minimized=false;
+
+}
+
+};
+
+// ---------- DESKTOP Dragging ----------
+resizer.addEventListener("mousedown", () => resizing = true);
+
+titlebar.addEventListener("mousedown", (e) => {
+    dragging = true;
+    offsetX = e.clientX - ui.offsetLeft;
+    offsetY = e.clientY - ui.offsetTop;
 });
 
-document.addEventListener("mouseup",()=>{
-  dragging=false;
-  resizing=false;
+document.addEventListener("mousemove", (e) => {
+    if (resizing) {
+        ui.style.width = Math.max(600, e.clientX - ui.offsetLeft) + "px";
+        ui.style.height = Math.max(400, e.clientY - ui.offsetTop) + "px";
+    }
+
+    if (dragging) {
+        ui.style.left = (e.clientX - offsetX) + "px";
+        ui.style.top = (e.clientY - offsetY) + "px";
+    }
 });
 
-// CLOSE / MINIMIZE
+document.addEventListener("mouseup", () => {
+    resizing = false;
+    dragging = false;
+});
 
-let minimized = false;
+// ---------- MOBILE Dragging ----------
+titlebar.addEventListener("touchstart", (e) => {
+    dragging = true;
+    const touch = e.touches[0];
+    offsetX = touch.clientX - ui.offsetLeft;
+    offsetY = touch.clientY - ui.offsetTop;
+});
 
-$(".ms-close").onclick = () => {
-  ui.style.transform = "scale(0.92)";
-  ui.style.opacity = "0";
+document.addEventListener("touchmove", (e) => {
+    if (!dragging) return;
 
-  setTimeout(() => {
-    host.remove();
-  }, 220);
-};
+    const touch = e.touches[0];
+    ui.style.left = (touch.clientX - offsetX) + "px";
+    ui.style.top = (touch.clientY - offsetY) + "px";
+}, { passive: false });
 
-$(".ms-min").onclick = () => {
-
-  if (!minimized) {
-
-    ui.dataset.prevWidth = ui.offsetWidth + "px";
-    ui.dataset.prevHeight = ui.offsetHeight + "px";
-
-    ui.classList.add("minimized");
-
-    // smoother shrink
-    ui.style.transform = "scale(0.98)";
-    ui.style.width = "220px";
-    ui.style.height = "40px";
-
-    minimized = true;
-
-  } else {
-
-    ui.classList.remove("minimized");
-
-    ui.style.width = ui.dataset.prevWidth;
-    ui.style.height = ui.dataset.prevHeight;
-
-    ui.style.transform = "scale(1.03)";
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        ui.style.transform = "scale(1)";
-      });
-    });
-
-    minimized = false;
-  }
-};
+document.addEventListener("touchend", () => {
+    dragging = false;
+});
 
 })();
