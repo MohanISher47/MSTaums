@@ -16,7 +16,6 @@ if(document.getElementById("scriptix-ui")) return;
 const style=document.createElement("style");
 
 style.textContent=`
-/* Style has a skill issue UwU OwO :3 */
 #scriptix-ui{
 --ms-bg:rgba(30,30,46,.65);
 --ms-bar:rgba(24,24,37,.75);
@@ -540,7 +539,7 @@ const s=document.createElement("script");
 s.src="https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/Bookmarklet%20Manager/userscripts.js"
 document.head.appendChild(s);
 }
-// Meow :3
+
 if (action==="tab") {
 const s=document.createElement("script");
 s.src="https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/scripts/tabdisguise.js"
@@ -710,7 +709,6 @@ minimized=false;
 
 };
 
-/* ---------- DESKTOP ---------- */
 resizer.addEventListener("mousedown", () => resizing = true);
 
 titlebar.addEventListener("mousedown", (e) => {
@@ -736,7 +734,6 @@ document.addEventListener("mouseup", () => {
     dragging = false;
 });
 
-/* ---------- MOBILE / TOUCH ---------- */
 titlebar.addEventListener("touchstart", (e) => {
     dragging = true;
     const touch = e.touches[0];
