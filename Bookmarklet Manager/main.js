@@ -518,35 +518,76 @@ $$(".ms-side-item").forEach(item=>{
 
 // BUTTON ACTIONS
 
+    
 shadow.addEventListener("click",e=>{
   const btn=e.target.closest(".ms-button");
   if(!btn) return;
 
   const action=btn.dataset.action;
 
-  let load = src =>{
-    let s=document.createElement("script");
-    s.src=src;
+    if(action==="hello") alert("Hello!");
+    
+    if(action==="url") alert(location.href);
+    
+    if(action==="invert"){
+    document.body.style.filter=
+    document.body.style.filter==="invert(1)"?"":"invert(1)";
+    }
+    
+    if (action==="3d-page") {
+    const s=document.createElement("script");
+    s.src="https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Scripts@main/3Dpage.js";
     document.head.appendChild(s);
-  };
+    }
+    
+    if (action==="ixlambda"){
+    const s=document.createElement("script");
+    s.src="https://raw-githack-com.translate.goog/Augtive85YT/PhiPiBeta/main/IXLambda/main.js";
+    document.head.appendChild(s);
+    }
+    
+    if (action==="bh") {
+    const s=document.createElement("script");
+    s.src="https://gl-githack-com.translate.goog/CidCaribou/x-gui/-/raw/main/x-gui.js?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp";
+    document.head.appendChild(s);
+    }
+    
+    if (action==="exe") {
+    const s=document.createElement("script");
+    s.src="https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Menu@main/menu.js";
+    document.head.appendChild(s);
+    }
+    
+    if (action==="pc") {
+    const s=document.createElement("script");
+    s.src="https://menu.pxi-fusion.com/pxi-2.0/main.js";
+    document.head.appendChild(s);
+    }
+    
+    if (action==="devc") {
+    const s=document.createElement("script");
+    s.src="https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Scripts@refs/heads/main/DevConsole.js";
+    document.head.appendChild(s);
+    }
+    
+    if (action==="aclick") {
+    const s=document.createElement("script");
+    s.src="https://cdn.jsdelivr.net/gh/MohanIShim47/AutoClickerBookmarklet3@master/AutoClicker.js"
+    document.head.appendChild(s);
+    }
+    
+    if (action==="users") {
+    const s=document.createElement("script");
+    s.src="https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/Bookmarklet%20Manager/userscripts.js"
+    document.head.appendChild(s);
+    }
+    
+    if (action==="tab") {
+    const s=document.createElement("script");
+    s.src="https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/scripts/tabdisguise.js"
+    document.head.appendChild(s);
+    }
 
-  if(action==="hello") alert("Hello!");
-  if(action==="url") alert(location.href);
-
-  if(action==="invert"){
-    document.body.style.filter =
-      document.body.style.filter==="invert(1)"?"":"invert(1)";
-  }
-
-  if (action==="3d-page") load("https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Scripts@main/3Dpage.js");
-  if (action==="ixlambda") load("https://raw-githack.com/Augtive85YT/PhiPiBeta/main/IXLambda/main.js");
-  if (action==="bh") load("https://gl.githack.com/CidCaribou/x-gui/-/raw/main/x-gui.js");
-  if (action==="exe") load("https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Menu@main/menu.js");
-  if (action==="pc") load("https://menu.pxi-fusion.com/pxi-2.0/main.js");
-  if (action==="devc") load("https://cdn.jsdelivr.net/gh/CidCaribou/Executor-Scripts@main/DevConsole.js");
-  if (action==="aclick") load("https://cdn.jsdelivr.net/gh/MohanIShim47/AutoClickerBookmarklet3@master/AutoClicker.js");
-  if (action==="users") load("https://raw-githack.com/MohanIShim47/Scriptix/main/Bookmarklet%20Manager/userscripts.js");
-  if (action==="tab") load("https://raw-githack.com/MohanIShim47/Scriptix/main/scripts/tabdisguise.js");
 });
 
 // SEARCH
