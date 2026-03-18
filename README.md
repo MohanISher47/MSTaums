@@ -1,8 +1,5 @@
-# Scriptix v4.5
-
 <p align="center">
-  <img src="icon.png" width="300px"><br>
-  <b>Scriptix v4.5</b>
+  <img src="icon.png" width="300px">
 </p>
 
 ## How to use Scriptix v4.5
