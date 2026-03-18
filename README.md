@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="icon.png" width="120px">
+  <img src="src/img/icon.png" width="120px">
 </p>
 
 <h1 align="center">Scriptix</h1>
@@ -22,15 +22,11 @@ Scriptix is a **powerful bookmarklet-based UI system** that lets you run scripts
 
 💡 Think of it as a **mini app launcher overlay for the web**.
 
----
-
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="screenshot1.png" width="45%">
+  <img src="src/img/scriptix.png" width="45%">
 </p>
-
----
 
 ## ✨ Features
 
@@ -46,21 +42,11 @@ Scriptix is a **powerful bookmarklet-based UI system** that lets you run scripts
 
 </p>
 
----
-
-## 🚀 Current Version
-**v5 Beta**
-
----
-
 ## 🧠 How to Use
 
 1. Create a new bookmark  
 2. Edit the bookmark  
-3. Paste the code below into the URL field  
-
-📖 Need help? Check:  
-`Bookmarklet Manager/ReadMe.md`
+3. Paste the code below into the URL field
 
 ---
 
