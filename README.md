@@ -2,7 +2,10 @@
   <img src="icon.png" width="300px">
 </p>
 
-## How to use Scriptix v4.5
+## Curent Version:
+**v5 Beta of Scriptix**
+
+## How to use Scriptix
 **Copy the code below and paste it into the url input of your bookmarklet.** If you are having trouble check out Bookmarklet Manager/ReadMe.md to see further instructions.
 
 ## License for Scriptix
@@ -20,6 +23,6 @@ I usally release a new update every day unless I'm working on a big other than t
 ## Other info
 If you want to see the current changelog go to: https://github.com/MohanISher47/Scriptix/releases/tag/v4.5
 
-If you have any bugs on Scriptix v4.5 you need me to fix or want me to add a certain bookmarklet make an issue.
+If you have any bugs on Scriptix you need me to fix or want me to add a certain bookmarklet make an issue.
 
 ### By TEDA.
