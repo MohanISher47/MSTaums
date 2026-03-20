@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-v5%20Beta-8a5cff?style=for-the-badge">
-  <img src="https://img.shields.io/github/license/MohanIShim47/Scriptix?style=for-the-badge">
-  <img src="https://img.shields.io/github/stars/MohanIShim47/Scriptix?style=for-the-badge">
+  <img src="https://img.shields.io/badge/version-v5%20Beta-8a5cff?style=border-radius:%208px;,%20height%3A%20300rem">
+  <img src="https://img.shields.io/github/license/MohanIShim47/Scriptix?style=border-radius:%208px;,%20height%3A%20300rem">
+  <img src="https://img.shields.io/github/stars/MohanIShim47/Scriptix?color=b4befe&style=border-radius: 8px;, height: 300rem">
 </p>
 
 ---
