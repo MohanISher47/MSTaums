@@ -34,14 +34,13 @@ Also if you found Scriptix to your advantage, please consider staring this repos
 
 <p align="center">
 
-| V5 Beta | Check |
-|----------|-------------|
-| Ui | -[x] |
-| Glow Toggle | -[x] |
-| Themes | -[x] |
-| Customizability | -[x] |
-| Scripts running | -[x] |
-| UAF | -[x] |
+| 🧩 Modular | 🎛️ Custom UI | ⚡ Fast |
+|----------|-------------|--------|
+| Load scripts dynamically | Draggable & resizable window | Instant execution |
+
+| 🎮 Scripts | 🛠️ Tools | 💾 Persistent Settings |
+|----------|---------|----------------------|
+| Game helpers & automation | Dev tools & utilities | Saves preferences locally |
 
 </p>
 
