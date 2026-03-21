@@ -418,6 +418,9 @@ javascript: (function () {
                     <div class="ms-side-item" data-page="tools">
                     <span><i data-lucide="hammer"></i></span>Tools
                     </div>
+                    <div class="ms-side-item" data-page="custom">
+                    <span><i data-lucide="star"></i></span>Custom
+                    </div>
                     <div class="ms-side-item" data-page="chat">
                     <span><i data-lucide="message-circle-more"></i></span>Chat
                     </div>                       
@@ -513,7 +516,14 @@ javascript: (function () {
                     <div class="ms-header">Tools</div>
                     <button class="ms-button" data-action="devc">Dev Console</button>
                     <button class="ms-button" data-action="users">Scriptix Userscript Manager Loader</button>
-                    </div>                   
+                    </div>
+                    
+                    <div class="ms-page" id="custom">
+                    <div class="ms-header">Custom</div>
+                    <button class="ms-button" id="add-custom">➕ Add Bookmarklet</button>
+                    <div class="ms-header">Custom Bookmarklets:</div>
+                    <div id="custom-list" style="display:flex; flex-direction:column; gap:8px; margin-top:10px;"></div>
+                    </div>
 
                     <div class="ms-page" id="chat">
                     <div class="ms-header">Chat</div>
@@ -722,6 +732,70 @@ javascript: (function () {
             }
           });
 
+          function getCustomScripts() {
+            return JSON.parse(localStorage.getItem("scriptix-custom") || "[]");
+          }
+
+          function saveCustomScripts(list) {
+            localStorage.setItem("scriptix-custom", JSON.stringify(list));
+          }
+
+          function renderCustomScripts() {
+            const container = $("#custom-list");
+            if (!container) return;
+
+            container.innerHTML = "";
+
+            const scripts = getCustomScripts();
+
+            scripts.forEach((script, index) => {
+              const btn = document.createElement("button");
+              btn.className = "ms-button";
+              btn.textContent = script.name;
+
+              btn.onclick = () => {
+                try {
+                  new Function(script.code)();
+                } catch (e) {
+                  alert("Error running script");
+                  console.error(e);
+                }
+              };
+
+              // Right click to delete
+              btn.oncontextmenu = (e) => {
+                e.preventDefault();
+                if (confirm("Delete this bookmarklet?")) {
+                  scripts.splice(index, 1);
+                  saveCustomScripts(scripts);
+                  renderCustomScripts();
+                }
+              };
+
+              container.appendChild(btn);
+            });
+          }
+
+          const addBtn = $("#add-custom");
+
+          if (addBtn) {
+            addBtn.onclick = () => {
+              const name = prompt("Enter bookmarklet name:");
+              if (!name) return;
+
+              const code = prompt("Paste bookmarklet code (javascript:...)");
+              if (!code) return;
+
+              const cleaned = code.replace(/^javascript:/i, "");
+
+              const scripts = getCustomScripts();
+              scripts.push({ name, code: cleaned });
+
+              saveCustomScripts(scripts);
+              renderCustomScripts();
+            };
+          }
+
           const search = $("#scriptix-search");
           if (search) {
             search.addEventListener("input", () => {
@@ -803,6 +877,8 @@ javascript: (function () {
             }
           }
 
+          renderCustomScripts();
+
           let dragging = false,
             resizing = false,
             ox = 0,
@@ -874,7 +950,7 @@ javascript: (function () {
         })();
       } else {
         localStorage.setItem("sx_attempts", attempts + 1);
-        console.log("%cGET OUT!!!!!!!!!!!", "color:red;font-size:20px;");
+        console.log("%cGET OUT!!!!!!!!!!!", "color:red;font-size:90px;");
 
         document.documentElement.innerHTML = `
           <head>
@@ -901,10 +977,15 @@ javascript: (function () {
               }
 
               .icon {
-                font-size: 70px;
                 margin-bottom: 20px;
-                align-self: center;
-                width: 100px;
+                display: flex;
+                justify-content: center;
+              }
+
+              .icon img {
+                display: block;
+                margin: 0 auto;
+                width: 500px;
               }
 
               h1 {
@@ -926,7 +1007,11 @@ javascript: (function () {
             <div class="container">
               <div class="icon"><img src="https://raw-githubusercontent-com.translate.goog/MohanIShim47/Scriptix/main/src/img/block.png" /></div>
               <h1>Scriptix Has Blocked You</h1>
-              <p>Sorry, but you entered the worng passcode. If you are a student just try again or ask me, it might be a error. Otherwise GET OUT!!!</p>
+              <p>
+              Sorry, but you entered the worng passcode. If you are a student just try again or ask me, it might be a error. 
+              Also you may experience having tried to many passcode in which just contact me if you're a student. Oh, and for 
+              the ones who aren't a student, I wish you good luck on trying to get out of this.
+              </p>
             </div>
           </body>
         `;

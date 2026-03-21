@@ -5,13 +5,13 @@
 <h1 align="center">Scriptix</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-v5%20Beta.1-8a5cff?color=c6a0f6&style=border-radius:%208px;,%20height%3A%20300rem">
+  <img src="https://img.shields.io/badge/version-v5-8a5cff?color=c6a0f6&style=border-radius:%208px;,%20height%3A%20300rem">
   <img src="https://img.shields.io/github/license/MohanIShim47/Scriptix?color=ee99a0&style=border-radius:%208px;,%20height%3A%20300rem">
   <img src="https://img.shields.io/github/stars/MohanIShim47/Scriptix?color=b4befe&style=border-radius:%208px;,%20height%3A%20300rem">
 </p>
 
 <p align="center">
-  <b>A modular bookmarklet toolkit for scripts, utilities, and browser tools</b>
+  <b>A modular bookmarklet toolkit for scripts, utilities, and browser tools that reminds you modding is your right</b>
 </p>
 
 ---
