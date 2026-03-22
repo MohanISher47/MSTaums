@@ -143,6 +143,6 @@ export function omegaIota(args = {}) {
         document.open();
         document.write(htmlData);
         document.close();
-        throw "SCRIPTIX-BLOCKED";
+        console.log("%cGet OUT!!!", "font-size:20px;font-weight:bold;color:#FF0000;")
     }
 }
