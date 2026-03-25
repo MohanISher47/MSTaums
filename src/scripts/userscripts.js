@@ -1,345 +1,318 @@
-(function(){
+(function () {
+  ex = atob("c2NyaXB0S2V5");
+  secret = atob("b24=");
+  if (localStorage.getItem(ex) == secret) {
+    if (window.MSUserScriptManagerLoaded) return;
+    window.MSUserScriptManagerLoaded = true;
 
-if(window.MSUserScriptManagerLoaded) return;
-window.MSUserScriptManagerLoaded = true;
-
-function getScripts(){
-  return JSON.parse(localStorage.getItem("MS_USERSCRIPTS") || "[]");
-}
-
-function saveScripts(s){
-  localStorage.setItem("MS_USERSCRIPTS", JSON.stringify(s));
-}
-
-function match(pattern, url){
-
-  const regex = new RegExp(
-    pattern
-      .replace(/[.+?^${}()|[\]\\]/g,"\\$&")
-      .replace(/\*/g,".*")
-  );
-
-  return regex.test(url);
-}
-
-function runScripts(){
-
-  const scripts = getScripts();
-
-  scripts.forEach(s => {
-
-    if(!s.enabled) return;
-
-    if(match(s.match, location.href)){
-
-      try{
-
-        console.log("[Userscript]", s.name);
-        new Function(s.code)();
-
-      }catch(e){
-
-        console.error("Userscript Error:", e);
-
-      }
-
+    function getScripts() {
+      return JSON.parse(localStorage.getItem("MS_USERSCRIPTS") || "[]");
     }
 
-  });
+    function saveScripts(s) {
+      localStorage.setItem("MS_USERSCRIPTS", JSON.stringify(s));
+    }
 
-}
+    function match(pattern, url) {
+      const regex = new RegExp(
+        pattern.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, ".*"),
+      );
 
-const style = document.createElement("style");
+      return regex.test(url);
+    }
 
-style.textContent = `
-#ms-userscripts{
-  position:fixed;
-  top:80px;
-  left:120px;
-  width:600px;
-  height:420px;
-  background:#1e1e2e;
-  color:#cdd6f4;
-  font-family:monospace;
-  border-radius:12px;
-  z-index:9999999;
-  display:flex;
-  flex-direction:column;
-  box-shadow:0 5px 20px #b4befe;
-}
+    function runScripts() {
+      const scripts = getScripts();
 
-#ms-userscripts header{
-  height:38px;
-  display:flex;
-  align-items:center;
-  padding:0 10px;
-  background:#181825;
-  cursor:move;
-}
+      scripts.forEach((s) => {
+        if (!s.enabled) return;
 
-#ms-userscripts header button{
-background:#313244;
-border:none;
-color:#cdd6f4;
-width:28px;
-height:22px;
-margin-left:6px;
-border-radius:4px;
-cursor:pointer;
-}
+        if (match(s.match, location.href)) {
+          try {
+            console.log("[Userscript]", s.name);
+            new Function(s.code)();
+          } catch (e) {
+            console.error("Userscript Error:", e);
+          }
+        }
+      });
+    }
 
-#ms-userscripts header button:hover{
-background:#45475a;
-}
+    const style = document.createElement("style");
 
-#ms-userscripts main{
-  flex:1;
-  display:flex;
-}
+    style.textContent = `
+    #ms-userscripts{
+      position:fixed;
+      top:80px;
+      left:120px;
+      width:600px;
+      height:420px;
+      background:#1e1e2e;
+      color:#cdd6f4;
+      font-family:monospace;
+      border-radius:12px;
+      z-index:9999999;
+      display:flex;
+      flex-direction:column;
+      box-shadow:0 5px 20px #b4befe;
+    }
 
-#ms-script-list{
-  width:180px;
-  background:#11111b;
-  overflow:auto;
-}
+    #ms-userscripts header{
+      height:38px;
+      display:flex;
+      align-items:center;
+      padding:0 10px;
+      background:#181825;
+      cursor:move;
+    }
 
-.ms-script-item{
-  padding:8px;
-  border-bottom:1px solid #222;
-  cursor:pointer;
-}
+    #ms-userscripts header button{
+    background:#313244;
+    border:none;
+    color:#cdd6f4;
+    width:28px;
+    height:22px;
+    margin-left:6px;
+    border-radius:4px;
+    cursor:pointer;
+    }
 
-.ms-script-item:hover{
-  background:#313244;
-}
+    #ms-userscripts header button:hover{
+    background:#45475a;
+    }
 
-#ms-editor{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  padding:8px;
-  gap:6px;
-}
+    #ms-userscripts main{
+      flex:1;
+      display:flex;
+    }
 
-#ms-editor input,
-#ms-editor textarea{
-  background:#11111b;
-  color:#cdd6f4;
-  border:none;
-  border-radius:6px;
-  padding:6px;
-  font-family:monospace;
-}
+    #ms-script-list{
+      width:180px;
+      background:#11111b;
+      overflow:auto;
+    }
 
-#ms-editor textarea{
-  flex:1;
-  resize:none;
-}
+    .ms-script-item{
+      padding:8px;
+      border-bottom:1px solid #222;
+      cursor:pointer;
+    }
 
-#ms-buttons{
-  display:flex;
-  gap:6px;
-}
+    .ms-script-item:hover{
+      background:#313244;
+    }
 
-#ms-buttons button{
-  flex:1;
-  background:#313244;
-  border:none;
-  color:#cdd6f4;
-  padding:6px;
-  border-radius:6px;
-  cursor:pointer;
-}
+    #ms-editor{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      padding:8px;
+      gap:6px;
+    }
 
-#ms-buttons button:hover{
-  background:#45475a;
-}
-`;
+    #ms-editor input,
+    #ms-editor textarea{
+      background:#11111b;
+      color:#cdd6f4;
+      border:none;
+      border-radius:6px;
+      padding:6px;
+      font-family:monospace;
+    }
 
-document.head.appendChild(style);
+    #ms-editor textarea{
+      flex:1;
+      resize:none;
+    }
 
-const ui = document.createElement("div");
-ui.id = "ms-userscripts";
+    #ms-buttons{
+      display:flex;
+      gap:6px;
+    }
 
-ui.innerHTML = `
-<header>
-  <span style="flex:1">Scriptix UserScript Manger</span>
-  <button id="ms-min">-</button>
-  <button id="ms-close">×</button>
-</header>
+    #ms-buttons button{
+      flex:1;
+      background:#313244;
+      border:none;
+      color:#cdd6f4;
+      padding:6px;
+      border-radius:6px;
+      cursor:pointer;
+    }
 
-<main>
+    #ms-buttons button:hover{
+      background:#45475a;
+    }
+    `;
 
-<div id="ms-script-list">
+    document.head.appendChild(style);
 
-<div id="ms-buttons">
-<button id="ms-taums-launch">Scriptix</button>
-</div>
-</div>
+    const ui = document.createElement("div");
+    ui.id = "ms-userscripts";
 
-<div id="ms-editor">
+    ui.innerHTML = `
+    <header>
+      <span style="flex:1">Scriptix UserScript Manger</span>
+      <button id="ms-min">-</button>
+      <button id="ms-close">×</button>
+    </header>
 
-<input id="ms-name" placeholder="Script name">
-<input id="ms-match" placeholder="Match pattern (*://*/*)">
-<textarea id="ms-code" placeholder="Userscript code"></textarea>
+    <main>
 
-<div id="ms-buttons">
-<button id="ms-save">Save</button>
-<button id="ms-run">Run</button>
-<button id="ms-delete">Delete</button>
-<button id="ms-toggle">Enable/Disable</button>
-</div>
+    <div id="ms-script-list">
 
-</div>
+    <div id="ms-buttons">
+    <button id="ms-taums-launch">Scriptix</button>
+    </div>
+    </div>
 
-</main>
-`;
+    <div id="ms-editor">
 
-document.body.appendChild(ui);
+    <input id="ms-name" placeholder="Script name">
+    <input id="ms-match" placeholder="Match pattern (*://*/*)">
+    <textarea id="ms-code" placeholder="Userscript code"></textarea>
 
-function refresh(){
+    <div id="ms-buttons">
+    <button id="ms-save">Save</button>
+    <button id="ms-run">Run</button>
+    <button id="ms-delete">Delete</button>
+    <button id="ms-toggle">Enable/Disable</button>
+    </div>
 
-  const list = document.getElementById("ms-script-list");
-  list.innerHTML = "";
+    </div>
 
-  const scripts = getScripts();
+    </main>
+    `;
 
-  scripts.forEach((s,i)=>{
+    document.body.appendChild(ui);
 
-    const div = document.createElement("div");
+    function refresh() {
+      const list = document.getElementById("ms-script-list");
+      list.innerHTML = "";
 
-    div.className = "ms-script-item";
+      const scripts = getScripts();
 
-    div.textContent = s.name + (s.enabled ? "" : " (disabled)");
+      scripts.forEach((s, i) => {
+        const div = document.createElement("div");
 
-    div.onclick = ()=>{
-      document.getElementById("ms-name").value = s.name;
-      document.getElementById("ms-match").value = s.match;
-      document.getElementById("ms-code").value = s.code;
+        div.className = "ms-script-item";
+
+        div.textContent = s.name + (s.enabled ? "" : " (disabled)");
+
+        div.onclick = () => {
+          document.getElementById("ms-name").value = s.name;
+          document.getElementById("ms-match").value = s.match;
+          document.getElementById("ms-code").value = s.code;
+        };
+
+        list.appendChild(div);
+      });
+    }
+
+    let minimized = false;
+
+    document.getElementById("ms-close").onclick = () => {
+      ui.remove();
+      window.MSUserScriptManagerLoaded = false;
     };
 
-    list.appendChild(div);
+    document.getElementById("ms-min").onclick = () => {
+      const main = ui.querySelector("main");
 
-  });
+      minimized = !minimized;
 
-}
+      if (minimized) {
+        main.style.display = "none";
+        ui.style.height = "38px";
+      } else {
+        main.style.display = "flex";
+        ui.style.height = "420px";
+      }
+    };
 
-let minimized=false;
+    document.getElementById("ms-save").onclick = () => {
+      const name = document.getElementById("ms-name").value;
+      const match = document.getElementById("ms-match").value;
+      const code = document.getElementById("ms-code").value;
 
-document.getElementById("ms-close").onclick = ()=>{
-  ui.remove();
-  window.MSUserScriptManagerLoaded=false;
-};
+      if (!name || !match || !code) return alert("Fill fields");
 
-document.getElementById("ms-min").onclick = ()=>{
+      let scripts = getScripts();
 
-  const main = ui.querySelector("main");
+      const existing = scripts.find((s) => s.name === name);
 
-  minimized = !minimized;
+      if (existing) {
+        existing.match = match;
+        existing.code = code;
+      } else {
+        scripts.push({
+          name,
+          match,
+          code,
+          enabled: true,
+        });
+      }
 
-  if(minimized){
-    main.style.display="none";
-    ui.style.height="38px";
-  }else{
-    main.style.display="flex";
-    ui.style.height="420px";
-  }
+      saveScripts(scripts);
 
-};
+      refresh();
+    };
 
-document.getElementById("ms-save").onclick = ()=>{
+    document.getElementById("ms-delete").onclick = () => {
+      const name = document.getElementById("ms-name").value;
 
-  const name = document.getElementById("ms-name").value;
-  const match = document.getElementById("ms-match").value;
-  const code = document.getElementById("ms-code").value;
+      let scripts = getScripts();
 
-  if(!name || !match || !code) return alert("Fill fields");
+      scripts = scripts.filter((s) => s.name !== name);
 
-  let scripts = getScripts();
+      saveScripts(scripts);
 
-  const existing = scripts.find(s=>s.name===name);
+      refresh();
+    };
 
-  if(existing){
-    existing.match = match;
-    existing.code = code;
-  }else{
-    scripts.push({
-      name,
-      match,
-      code,
-      enabled:true
+    document.getElementById("ms-run").onclick = () => {
+      try {
+        new Function(document.getElementById("ms-code").value)();
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    document.getElementById("ms-toggle").onclick = () => {
+      const name = document.getElementById("ms-name").value;
+
+      let scripts = getScripts();
+
+      scripts.forEach((s) => {
+        if (s.name === name) {
+          s.enabled = !s.enabled;
+        }
+      });
+
+      saveScripts(scripts);
+
+      refresh();
+    };
+
+    let dragging = false;
+    let offsetX, offsetY;
+
+    ui.querySelector("header").onmousedown = (e) => {
+      dragging = true;
+      offsetX = e.clientX - ui.offsetLeft;
+      offsetY = e.clientY - ui.offsetTop;
+    };
+
+    document.addEventListener("mousemove", (e) => {
+      if (!dragging) return;
+
+      ui.style.left = e.clientX - offsetX + "px";
+      ui.style.top = e.clientY - offsetY + "px";
     });
+
+    document.addEventListener("mouseup", () => (dragging = false));
+
+    refresh();
+    runScripts();
   }
-
-  saveScripts(scripts);
-
-  refresh();
-
-};
-
-document.getElementById("ms-delete").onclick = ()=>{
-
-  const name = document.getElementById("ms-name").value;
-
-  let scripts = getScripts();
-
-  scripts = scripts.filter(s=>s.name!==name);
-
-  saveScripts(scripts);
-
-  refresh();
-
-};
-
-document.getElementById("ms-run").onclick = ()=>{
-
-  try{
-    new Function(document.getElementById("ms-code").value)();
-  }catch(e){
-    console.error(e);
-  }
-
-};
-
-document.getElementById("ms-toggle").onclick = ()=>{
-
-  const name = document.getElementById("ms-name").value;
-
-  let scripts = getScripts();
-
-  scripts.forEach(s=>{
-    if(s.name===name){
-      s.enabled = !s.enabled;
-    }
-  });
-
-  saveScripts(scripts);
-
-  refresh();
-
-};
-
-let dragging=false;
-let offsetX,offsetY;
-
-ui.querySelector("header").onmousedown=e=>{
-  dragging=true;
-  offsetX=e.clientX-ui.offsetLeft;
-  offsetY=e.clientY-ui.offsetTop;
-};
-
-document.addEventListener("mousemove",e=>{
-
-  if(!dragging) return;
-
-  ui.style.left=(e.clientX-offsetX)+"px";
-  ui.style.top=(e.clientY-offsetY)+"px";
-
-});
-
-document.addEventListener("mouseup",()=>dragging=false);
-
-refresh();
-runScripts();
-
 })();

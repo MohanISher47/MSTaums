@@ -44,8 +44,19 @@ Also if you found Scriptix to your advantage, please consider staring this repos
 
 </p>
 
+## 🎥 Credits
+
+### TEDA - Co-owner of ΦΠΒ and Owner of Scriptix
+
+Created Scriptix, made many cool gui features, and etc.
+
+### SUDO - Owner of ΦΠΒ and Owner of IXLmabda
+
+Created PhiPiBeta, Created IXlambda, made validation feature, and also made link loading work.
+
 ## 🧠 Password
-Due tO SUDO and I, TEDA, deciding this operation should be private we've put a password on both our programs, IXLambda and Scriptix, so if you must run it you either need to get the code from SUDO or me. This was made to protect our programs, so please do not hate us for this change. (Also because We wanted to learn cryptography)
+
+Due to SUDO and I, TEDA, deciding this operation should be private we've put a password on both our programs, IXLambda and Scriptix, so if you must run it you either need to get the code from SUDO or me. This was made to protect our programs, so please do not hate us for this change. (Also because We wanted to learn cryptography)
 
 Thank you, The Owners of ΦΠΒ
 
