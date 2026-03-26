@@ -361,6 +361,13 @@
           margin-bottom: 14px;
         }
 
+        .ms-setting-row-1 {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 14px;
+        }        
+
         .ms-setting-row:last-child {
           margin-bottom: 0;
         }
@@ -562,9 +569,24 @@
                         <div class="ms-settings">
 
                           <div class="ms-settings-section">
+                            <div class="ms-settings-title">Themes</div>
+
+                            <div class="ms-setting-row-1">
+                              <select id="theme-selector">
+                                <option value="macchiato">Catppuccin Macchiato (default)</option>
+                                <option value="mocha">Catppuccin Mocha</option>
+                                <option value="dark">Dark</option>
+                                <option value="light">Light</option>
+                                <option value="hack">Hack</option>
+                              </select>
+                            </div>
+
+                          </div>
+
+                          <div class="ms-settings-section">
                             <div class="ms-settings-title">Appearance</div>
 
-                            <div class="ms-setting-row">
+                            <div class="ms-setting-row-1">
                               <div>
                                 <div class="ms-setting-label">Accent Color</div>
                                 <div class="ms-setting-desc">Primary highlight color</div>
@@ -667,8 +689,7 @@
                     <title>Chat | Scriptix</title>
                 </head>
                 <body>
-                  <script src="https://chitchatter.im/sdk.js"></script>
-                  <chat-room width="100%" height="810px" room="scriptixchat01" />
+                  <iframe src="https://chitchatter.im/public/scriptix?embed=1" allow="camera;microphone;display-capture;fullscreen" style="width:100vw;height:100vh;display:block;" />
                 </body>
               `;
 
