@@ -70,4 +70,4 @@ Go to this link to see the changelog:
 ## 💻 Bookmarklet Code
 
 ```js
-javascript:(function()%7Bvar script %3D document.createElement("script")%3B%0Ascript.src %3D "https%3A%2F%2Fraw-githack-com.translate.goog%2FMohanIShim47%2FScriptix%2Fmain%2Fsrc%2Fmain.js"%3B%0Adocument.head.appendChild(script)%3B%7D)()
+javascript:(function()%7B if (localStorage.getItem("scriptKey") %3D%3D%3D "on") %7B%0Avar script %3D document.createElement("script")%3B%0Ascript.src%3D"https%3A%2F%2Fraw-githack-com.translate.goog%2FMohanIShim47%2FScriptix%2Fmain%2Fsrc%2Fmain.js"%3B%0Adocument.head.appendChild(script)%3B%0A%7D%0A%7D)()
